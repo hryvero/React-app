@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header/Header.js";
+import Navbar from "./components/Navbar/Navbar.js";
+import Profile from "./components/Profile/Profile.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import "./reset.scss";
+import "./App.css";
+import Dialogs from "./components/Dialogs/Dialogs.js";
+
+function App(props) {
+  // let usersItem = [
+  //   { name: "Victor", id: 1 },
+  //   { name: "Anna", id: "2" },
+  //   { name: "Irina", id: "3" },
+  //   { name: "Arina", id: "4" },
+  // ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-wrapper">
+      <BrowserRouter>
+        <Header />
+        <div className="app-wrapper-content">
+          <Navbar />
+
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/dialogs"
+              element={<Dialogs state={props.state.usersItem} />}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
